@@ -1,6 +1,7 @@
 package com.epam.pizza.model.products;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Pizza extends Product{
 
@@ -31,5 +32,22 @@ public class Pizza extends Product{
 
     public List<Ingredients> getIngredients() {
         return ingredients;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Pizza pizza = (Pizza) o;
+        return ccal == pizza.ccal &&
+                pizzaType.equals(pizza.pizzaType) &&
+                nutritionalValue.equals(pizza.nutritionalValue) &&
+                ingredients.equals(pizza.ingredients);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), pizzaType, nutritionalValue, ccal, ingredients);
     }
 }
