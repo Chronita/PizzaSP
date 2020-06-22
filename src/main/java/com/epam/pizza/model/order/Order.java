@@ -57,4 +57,15 @@ public class Order {
         return payMethod;
     }
 
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public int sum() {
+        int sum = 0;
+        for (Product product : products) {
+            sum += product.getProductValue();
+        }
+        return sum;
+    }
 }
