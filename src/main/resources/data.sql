@@ -1,0 +1,55 @@
+DROP TABLE IF EXISTS PizzaIngredients;
+DROP TABLE IF EXISTS Pizza;
+DROP TABLE IF EXISTS PayMethod;
+DROP TABLE IF EXISTS Ingredients;
+DROP TABLE IF EXISTS Drinks;
+
+CREATE TABLE IF NOT EXISTS Pizza (
+pizzaID INT PRIMARY KEY,
+nameOfPizza VARCHAR(25),
+pizzaType VARCHAR(25),
+nutritionalValue VARCHAR(25),
+ccal INT
+);
+
+CREATE TABLE IF NOT EXISTS PayMethod (
+payMethodID INT PRIMARY KEY,
+nameOfPayMethod VARCHAR(25)
+);
+
+CREATE TABLE IF NOT EXISTS Ingredients (
+ingredientID INT PRIMARY KEY,
+nameOfIngredient VARCHAR(40)
+);
+
+CREATE TABLE IF NOT EXISTS Drinks (
+drinkID INT PRIMARY KEY,
+nameOfDrink VARCHAR(25),
+nutritionalValue VARCHAR(25),
+ccal INT
+);
+
+CREATE TABLE IF NOT EXISTS PizzaIngredients (
+pizzaID INT,
+ingredientID INT,
+PRIMARY KEY (pizzaID, ingredientID),
+FOREIGN KEY (pizzaID)
+REFERENCES Pizza (pizzaID),
+FOREIGN KEY (ingredientID)
+REFERENCES Ingredients (ingredientID)
+);
+
+INSERT INTO PayMethod VALUES (1,'WITH_CARD'),(2,'WITH_CASH');
+INSERT INTO Ingredients VALUES (1,'CHICKEN,'),(2,'HAM'),(3,'PEPPERONI'),(4,'TOMATO_SAUCE'),(5,'CHORIZA'),(6,'MOZZARELLA'),(7,'LARGE_PORTION_OF_MOZZARELLA'),(8,'MIX_OF_CHEDDAR_AND_PARMESAN'), (9,'BLUE_CHEESE'),
+(10,'CREAM_SAUCE'), (11,'CREAM_SAUCE'), (12,'CHAMPIGNONS'), (13,'GARLIC'), (14,'COTTAGE_CHEESE') ;
+INSERT INTO Drinks VALUES (1,'WATER','0/0/0',0), (2,'COLA','0/0/10.2',42),(3,'JUICE','0/0/10.6',42);
+INSERT INTO Pizza VALUES (1,'MEAT PIZZA','OPENED','10.9/9.4/29.2',252.2), (2,'FOUR CHEESES','OPENED','13.2/13.2/32.5',309.9), (3,'BRAND NAME PIZZA','OPENED','6.3/4.3/38.8',224.6), (4,'CALZONE','CLOSED','11.3/18/21.9',303.5);
+INSERT INTO PizzaIngredients VALUES
+-- MEAT
+(1, 1), (1, 2), (1, 3), (1, 4), (1, 6),
+-- FOUR CHEESES
+(2, 7), (2, 8), (2, 9), (2, 10),
+-- BRAND NAME
+(3, 2), (3, 5), (3, 13), (3, 11),
+-- CALZONE
+(4, 12), (4, 13), (4, 14), (4, 11);
